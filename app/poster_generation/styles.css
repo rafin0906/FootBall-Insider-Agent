@@ -1,0 +1,156 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#111;
+    font-family:'Montserrat', sans-serif;
+}
+
+.card{
+    width:1080px;
+    height:1350px;
+    overflow:hidden;
+    border-radius:34px;
+    background:#071225;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    box-shadow:0 28px 80px rgba(0,0,0,.50);
+}
+
+.image-container{
+    flex:1;
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+}
+
+.bg{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center top;
+    display:block;
+    transform:scale(1.01);
+}
+
+/* Strong dark cinematic bottom blend */
+.image-container::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:620px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(7,18,37,0) 0%,
+            rgba(7,18,37,.06) 10%,
+            rgba(7,18,37,.18) 24%,
+            rgba(7,18,37,.40) 42%,
+            rgba(7,18,37,.68) 62%,
+            rgba(7,18,37,.90) 82%,
+            #071225 100%
+        );
+    z-index:2;
+}
+
+/* Full-card contrast layer */
+.image-container::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,0,0,0) 42%,
+            rgba(0,0,0,.12) 66%,
+            rgba(0,0,0,.32) 100%
+        );
+    z-index:1;
+    pointer-events:none;
+}
+
+.logo-wrap{
+    position:absolute;
+    top:42px;
+    left:42px;
+    z-index:5;
+    width:82px;
+    height:82px;
+    border-radius:20px;
+    background:rgba(255,255,255,.16);
+    backdrop-filter:blur(12px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+}
+
+.logo{
+    width:78px;
+    height:78px;
+    object-fit:contain;
+    display:block;
+}
+
+.news-panel{
+    position:absolute;
+    left:54px;
+    right:54px;
+    bottom:62px;
+    z-index:5;
+}
+
+.category{
+    display:inline-block;
+    padding:16px 28px;
+    border-radius:999px;
+    background:#2563eb;
+    color:#ffffff;
+    font-size:28px;
+    font-weight:900;
+    font-family:'Montserrat', sans-serif;
+    letter-spacing:.4px;
+    margin-bottom:28px;
+    box-shadow:0 12px 28px rgba(0,0,0,.24);
+    text-transform:uppercase;
+}
+
+h1{
+    color:#008000;
+    font-family:'Montserrat', sans-serif;
+    font-size:86px;
+    font-weight:900;
+    line-height:.90;
+    letter-spacing:-2px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    text-shadow:0 7px 22px rgba(0,0,0,.32);
+    max-width:94%;
+}
+
+h2{
+    color:#FFFF00;
+    font-family:'Montserrat', sans-serif;
+    font-size:56px;
+    font-weight:900;
+    line-height:1.02;
+    letter-spacing:-1px;
+    text-transform:uppercase;
+    text-shadow:0 5px 18px rgba(0,0,0,.30);
+    max-width:90%;
+}
