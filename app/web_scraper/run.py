@@ -1,11 +1,12 @@
-# web_scraper/run.py
+# app/web_scraper/run.py
+
 """
 Entry point.
 
 From the project root:
     python -m app.web_scraper.run
 
-Or directly (if you're inside the web_scraper folder):
+Or directly:
     python run.py
 """
 
@@ -17,6 +18,23 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from app.web_scraper.scraper import scrape_all
+from app.web_scraper.maintenance import delete_old_scraped_posts
+
+
+async def main() -> None:
+    print("\n========== SCRAPER JOB STARTED ==========")
+
+    print("========== CLEANUP BEFORE SCRAPING ==========")
+    delete_old_scraped_posts(hours=7)
+
+    print("========== RUNNING SCRAPER ==========")
+    await scrape_all()
+
+    print("========== CLEANUP AFTER SCRAPING ==========")
+    delete_old_scraped_posts(hours=7)
+
+    print("========== SCRAPER JOB FINISHED ==========\n")
+
 
 if __name__ == "__main__":
-    asyncio.run(scrape_all())
+    asyncio.run(main())

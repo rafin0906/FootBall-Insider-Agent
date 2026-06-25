@@ -63,6 +63,11 @@ def save_scraped_output_to_supabase(scraped_output: dict) -> int:
        AI_ENRICHED_CONTEXT: ...
     3. Create embedding from full post_content.
     4. Save post_content, images list, metadata, and embedding to Supabase.
+
+    Important:
+    created_at is NOT updated on conflict.
+    So created_at means the time when the row was first created.
+    Cleanup deletes only rows whose created_at crossed 7 hours.
     """
 
     saved_count = 0
