@@ -198,14 +198,10 @@ async def scrape_all() -> dict:
         "sources": all_results,
     }
 
-    # ── Save JSON exactly like before ─────────────────────────────────────────
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
-
+    # ── Initial scrape summary ────────────────────────────────────────────────
     print(f"\n{'─' * 55}")
     print("✅  Scraping complete!")
     print(f"   Posts collected : {output['total_posts']}")
-    print(f"   Output file     : {OUTPUT_FILE}")
     print(f"{'─' * 55}\n")
 
     # ── LLM enrichment + Supabase save ────────────────────────────────────────
@@ -215,14 +211,18 @@ async def scrape_all() -> dict:
 
     output["saved_to_supabase"] = saved_count
 
+    # ── Save final JSON after DB save info is added ───────────────────────────
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+
     print(f"\n{'─' * 55}")
     print("✅  Knowledge base update complete!")
     print(f"   Posts collected : {output['total_posts']}")
-    print(f"   Saved to DB     : {saved_count}")
+    print(f"   Saved/upserted DB rows : {saved_count}")
+    print(f"   Output file     : {OUTPUT_FILE}")
     print(f"{'─' * 55}\n")
 
     return output
-
 
 # ── Util ──────────────────────────────────────────────────────────────────────
 

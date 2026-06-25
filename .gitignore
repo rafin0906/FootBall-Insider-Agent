@@ -42,10 +42,6 @@ ENV/
 *.sqlite
 *.sqlite3
 
-# Session files - IMPORTANT: Don't commit your sessions!
-sessions/
-*.json
-!package.json  # If you have package.json for npm, keep it
 
 # Output files
 output/

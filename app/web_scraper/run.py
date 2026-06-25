@@ -19,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from app.web_scraper.scraper import scrape_all
 from app.web_scraper.maintenance import delete_old_scraped_posts
+from app.web_scraper.telegram_notify import send_scrape_report
 
 
 async def main() -> None:
@@ -28,7 +29,13 @@ async def main() -> None:
     delete_old_scraped_posts(hours=7)
 
     print("========== RUNNING SCRAPER ==========")
-    await scrape_all()
+    scraped_output = await scrape_all()
+
+    print("========== SENDING TELEGRAM SCRAPE REPORT ==========")
+    if scraped_output:
+        send_scrape_report(scraped_output)
+    else:
+        print("⚠️ scrape_all() returned nothing. Telegram report skipped.")
 
     print("========== CLEANUP AFTER SCRAPING ==========")
     delete_old_scraped_posts(hours=7)
